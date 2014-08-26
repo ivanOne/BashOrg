@@ -1,6 +1,8 @@
 <?php
 
-class DB{
+class DB
+
+{
     private  $connection;
     protected static $instance;
 
@@ -24,7 +26,9 @@ class DB{
 
 }
 
-class Models{
+class Models
+
+{
     protected $query;
 
     /**
@@ -113,7 +117,7 @@ class Models{
      * Число затронутых строк
     */
     public function count(){
-        $count = $this->query->columnCount();
+        $count = $this->query->rowCount();
         return $count;
     }
 
