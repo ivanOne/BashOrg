@@ -2,32 +2,23 @@
 
 class DB
 {
-    private $dsn = 'mysql:dbname=bash;host=localhost';
-    private $user = 'root';
-    private $password = '';
-    private $conection;
+    private  $connection;
     protected static $instance;
 
-    private function __construct()
-    {
-        try
-        {
-            $this->conection = new PDO($this->dsn,$this->user,$this->password);
-        }
-        catch (PDOException $e)
-        {
-            echo 'Подключение не удалось: ' . $e->getMessage();
-        }
+    private function __construct($dsn = 'mysql:dbname=bash;host=localhost',$user = 'root',$password = ''){
+            $this->connection = new PDO($dsn,$user,$password);
 
     }
 
-    public static function run()
-    {
-        if (null === self::$instance)
-        {
+    public static function run(){
+        if (null === self::$instance){
             self::$instance = new self();
         }
         return self::$instance;
+    }
+
+    public function  getConn(){
+        return $this->connection;
     }
 
     private function __clone(){}
@@ -89,7 +80,7 @@ class Models
     //Выполнение запроса
     public function execute()
     {
-        $this->query = DB::run()->prepare($this->query);
+        $this->query = DB::run()->getConn()->prepare($this->query);
         $this->query->execute();
         return $this;
     }
