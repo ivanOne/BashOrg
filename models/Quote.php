@@ -8,11 +8,10 @@ class Quote extends Models
      */
     public $items = 10;
 
-<<<<<<< HEAD
     public function validate(){
 
         foreach($this->attributes as $key => $value){
-            $key = $this->afterValid($value);
+            $key = $this->beforeValid($value);
         }
         if(strlen($this->attributes['title']) <= 100){
             $this->error['title'] = NULL;
@@ -56,15 +55,6 @@ class Quote extends Models
             $this->message = "Неудачно";
             return false;
         }
-
-=======
-    public function  validate()
-    {
-    }
-
-    public function insertQuote()
-    {
->>>>>>> 0988c85486da9b077214d0bb0e151b39ddecc900
     }
 
     /**

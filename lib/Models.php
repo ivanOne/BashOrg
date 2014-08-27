@@ -186,7 +186,7 @@ class Models
      * @param $param string входные данные
      * @return string
      */
-    protected function afterValid($param){
+    protected function beforeValid($param){
         $result = trim(htmlspecialchars($param));
         return $result;
     }
