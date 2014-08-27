@@ -8,6 +8,7 @@ class Quote extends Models
      */
     public $items = 10;
 
+<<<<<<< HEAD
     public function validate(){
 
         foreach($this->attributes as $key => $value){
@@ -56,6 +57,14 @@ class Quote extends Models
             return false;
         }
 
+=======
+    public function  validate()
+    {
+    }
+
+    public function insertQuote()
+    {
+>>>>>>> 0988c85486da9b077214d0bb0e151b39ddecc900
     }
 
     /**
