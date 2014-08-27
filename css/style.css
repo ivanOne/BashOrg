@@ -1,0 +1,7 @@
+a{text-decoration: none; color: black;}
+.category a{display: inline-block; padding: 10px;}
+.center{width: 20%; margin: auto;}
+.cont{width: 90%; margin: auto;}
+.quote{margin-bottom: 20px; border-bottom:1px solid black; overflow: hidden;}
+.pagination li{display: inline-block; list-style: none; padding: 10px;}
+.active{background-color: gray;}

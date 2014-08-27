@@ -7,7 +7,7 @@ class Category extends Models
      * @return array Извлекает категории
      */
     public function selectCategory(){
-        $allCategories = $this->select('quotes')->execute()->fetchAll();
+        $allCategories = $this->select('category')->fetchAll();
         return $allCategories;
     }
 } 

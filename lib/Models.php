@@ -196,6 +196,7 @@ class Models
      */
     public function setAttributes($request){
         $this->attributes = $request;
+        unset($this->attributes['action']);
     }
 
     public function getError(){

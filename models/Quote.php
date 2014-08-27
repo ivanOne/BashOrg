@@ -8,10 +8,24 @@ class Quote extends Models
      */
     public $items = 10;
 
+    /** Валидация модели
+     * @return bool
+    */
     public function validate(){
 
         foreach($this->attributes as $key => $value){
-            $key = $this->beforeValid($value);
+
+            if($value === ""){
+                $this->errorValid = $this->getError();
+                $this->error[$key] = "Поле обязательно для заполнения";
+            }
+            else{
+                $key = $this->beforeValid($value);
+            }
+        }
+
+        if(isset($this->errorValid)){
+            return false;
         }
         if(strlen($this->attributes['title']) <= 100){
             $this->error['title'] = NULL;
@@ -47,13 +61,12 @@ class Quote extends Models
 
     public function insertQuote(){
         if($this->validate()){
-            $this->insert(($this->attributes),'quotes')->execute();
+            $this->insert($this->attributes,'quotes')->execute();
             return $this->status;
         }
         else
         {
-            $this->message = "Неудачно";
-            return false;
+            return $this->error;
         }
     }
 
@@ -78,7 +91,7 @@ class Quote extends Models
     {
         $page = (int)$page;
         $startIndex = ($page - 1) * $this->items;
-        $result = $query->limit($startIndex, $this->items)->fetchAll();
+        $result = $query->limit($this->items,$startIndex)->fetchAll();
         $pages = ceil($all / $this->items);
         $activePage = $page;
         return array('result' => $result, 'pages' => $pages, 'activePage' => $activePage);
