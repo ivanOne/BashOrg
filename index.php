@@ -53,15 +53,15 @@ $category = Controller::getCategory();
                 foreach($quotes as $quote){ ?>
                      <div class='quote'>
                          <p>
-                            # <strong><?= $quote['id'];?></strong> <span><strong><?= $quote['title'];?></strong></span>
+                            # <strong><?= $quote['id'];?></strong> <span><strong><?= htmlspecialchars($quote['title']);?></strong></span>
                          </p>
                          <p>
                             <span>Дата: <?= $quote['datePub'];?></span>
                          </p>
                          <p>
-                             <?= $quote['text'];?>
+                             <?=  htmlspecialchars($quote['text']);?>
                          </p>
-                         <p>Автор - <?= $quote['author'];?></p>
+                         <p>Автор - <?= htmlspecialchars($quote['author']);?></p>
                      </div>
                 <?}?>
         </div>
@@ -97,33 +97,41 @@ $category = Controller::getCategory();
         </div>
         <div class="form">
             <form action="#" method="post">
-                <input type="hidden" name="action" value="insert"/>
-                <input type="text" name="title" placeholder="Заголовок"/>
-                <?php if($error->error['title']!==null){
-                    echo $error->error['title'];
-                }
-                ?>
-                <textarea name="text" cols="30" rows="10" placeholder="Текст"></textarea>
-                <?php if($error->error['text']!==null){
-                    echo $error->error['text'];
-                }
-                ?>
-                <input type="text" name="author" placeholder="Ваше имя"/>
-                <?php if($error->error['author']!==null){
-                    echo $error->error['author'];
-                }
-                ?>
+                <div class="input">
+                    <input type="hidden" name="action" value="insert"/>
+                    <input type="text" name="title" placeholder="Заголовок"/>
+                    <?php if($error->error['title']!==null){
+                        echo $error->error['title'];
+                    }
+                    ?>
+                </div>
+                <div class="input">
+                    <textarea name="text" cols="30" rows="10" placeholder="Текст"></textarea>
+                    <?php if($error->error['text']!==null){
+                        echo $error->error['text'];
+                    }
+                    ?>
+                </div>
+                <div class="input">
+                    <input type="text" name="author" placeholder="Ваше имя"/>
+                    <?php if($error->error['author']!==null){
+                        echo $error->error['author'];
+                    }
+                    ?>
+                </div>
+                <div class="input">
                 <select name="category">
                     <?php
                         foreach($category as $val){
                             echo "<option value='" . $val['id'] . "'>" . $val['name'] . "</option>";
                         }
                     ?>
-                </select>
-                <?php if($error->error['category']!==null){
-                    echo $error->error['category'];
-                }
-                ?>
+                    </select>
+                    <?php if($error->error['category']!==null){
+                        echo $error->error['category'];
+                    }
+                    ?>
+                </div>
                 <input type="submit" value="Отправить"/>
             </form>
         </div>

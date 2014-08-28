@@ -187,7 +187,7 @@ class Models
      * @return string
      */
     protected function beforeValid($param){
-        $result = trim(htmlspecialchars($param));
+        $result = trim($param);
         return $result;
     }
 
